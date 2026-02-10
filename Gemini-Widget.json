@@ -1,1 +1,93 @@
-{"id": "com.twoja-firma.sap.gemini","version": "1.0.0","name": "Google Gemini AI","description": "Custom Widget for SAP Analytics..."}
+{
+  "id": "com.kocu.sap.gemini",
+  "version": "1.0.0",
+  "name": "Google Gemini AI",
+  "description": "Custom Widget for SAP Analytics Cloud integrating Google Gemini models.",
+  "newInstancePrefix": "Gemini",
+  "vendor": "twoja-firma.com",
+  "eula": "",
+  "license": "MIT",
+  "icon": "https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg",
+  "webcomponents": [
+    {
+      "kind": "main",
+      "tag": "com-twoja-firma-sap-gemini",
+      "url": "https://twoj-serwer-lub-github.com/sciezka/do/Gemini.bundle.js",
+      "integrity": "",
+      "ignoreIntegrity": true
+    },
+    {
+      "kind": "builder",
+      "tag": "com-twoja-firma-sap-gemini-builder",
+      "url": "https://twoj-serwer-lub-github.com/sciezka/do/Gemini.bundle.js",
+      "integrity": "",
+      "ignoreIntegrity": true
+    }
+  ],
+  "properties": {
+    "apiKey": {
+      "description": "Google AI Studio API Key",
+      "type": "string",
+      "default": ""
+    },
+    "model": {
+      "description": "Gemini Model Name",
+      "type": "string",
+      "default": "gemini-1.5-flash"
+    },
+    "welcomeMsg": {
+      "description": "Welcome Message",
+      "type": "string",
+      "default": "Cześć! Jestem Gemini. W czym mogę pomóc?"
+    },
+    "chatBoxHeight": {
+      "description": "Height of Chat Box",
+      "type": "number",
+      "default": 60
+    },
+    "btnLabel": {
+      "description": "Label for Send Button",
+      "type": "string",
+      "default": "Wyślij"
+    },
+    "temperature": {
+      "description": "Temperature (Creativity)",
+      "type": "number",
+      "default": 0.7
+    },
+    "maxTokens": {
+      "description": "Max Output Tokens",
+      "type": "number",
+      "default": 1000
+    }
+  },
+  "methods": {
+    "setApiKey": {
+      "description": "Set API Key",
+      "parameters": [
+        {
+          "name": "apiKey",
+          "type": "string",
+          "description": "API Key"
+        }
+      ],
+      "body": "this.apiKey = apiKey;"
+    },
+    "setModel": {
+      "description": "Set Model Name",
+      "parameters": [
+        {
+          "name": "model",
+          "type": "string",
+          "description": "Model Name"
+        }
+      ],
+      "body": "this.model = model;"
+    }
+  },
+  "events": {
+    "onFailure": {
+      "description": "Triggered on API error"
+    }
+  }
+}
