@@ -1,9 +1,1 @@
-{
-  "widget": {
-    "type": "active",
-    "name": "Gemini Widget",
-    "description": "A powerful widget for Gemini users.",
-    "version": "1.0.0",
-    "url": "https://raw.githubusercontent.com/k0cu/Gemini-widget/main/GeminiWidget.js"
-  }
-}
+{"id": "com.twoja-firma.sap.gemini","version": "1.0.0","name": "Google Gemini AI","description": "Custom Widget for SAP Analytics..."}
