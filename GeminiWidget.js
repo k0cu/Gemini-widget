@@ -233,8 +233,13 @@
 
             try {
                 // 2. Wywołanie Google Gemini API z retry logic
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/${this._model}:generateContent?key=${this._apiKey}`;
-                
+                //const url = `https://generativelanguage.googleapis.com/v1beta/models/${this._model}:generateContent?key=${this._apiKey}`;
+                // Wpiszemy to na sztywno, żeby przetestować połączenie
+// UWAGA: Podmień TU_WPISZ_SWOJ_KLUCZ na ten nowy klucz z Google AI Studio
+const hardcodedModel = "gemini-1.5-flash"; 
+const hardcodedKey = "AIzaSyCEbXM2TdHDZlZNDVyyem4YhRzRvJ7CdEY"; 
+
+const url = `https://generativelanguage.googleapis.com/v1beta/models/${hardcodedModel}:generateContent?key=${hardcodedKey}`;
                 const payload = {
                     contents: [{
                         parts: [{ text: text }]
