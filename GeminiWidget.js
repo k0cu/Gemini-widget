@@ -115,7 +115,7 @@
 
             // Default Properties
             this._apiKey = "";
-            this._model = "gemini-1.5-flash"; // Aktualny szybki model Google
+            this._model = "gemini-1.5-flash-latest"; // Aktualny szybki model Google
             this._welcomeMsg = "Hello! I am Gemini. How can I help you?";
             this._temperature = 0.7;
             this._maxTokens = 1000;
@@ -252,7 +252,12 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                    let errText = `${response.status} ${response.statusText}`;
+                    try {
+                        const errBody = await response.json();
+                        if (errBody?.error?.message) errText = errBody.error.message;
+                    } catch (_) {}
+                    throw new Error(`API Error: ${errText}`);
                 }
 
                 const data = await response.json();
