@@ -33,7 +33,7 @@
     "model": {
       "description": "Gemini Model Name",
       "type": "string",
-      "default": "gemini-1.5-flash-latest"
+      "default": "gemini-1.5-flash-002"
     },
     "welcomeMsg": {
       "description": "Welcome Message",

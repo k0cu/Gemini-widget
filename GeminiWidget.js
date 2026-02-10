@@ -115,7 +115,7 @@
 
             // Default Properties
             this._apiKey = "";
-            this._model = "gemini-1.5-flash-latest"; // Aktualny szybki model Google
+            this._model = "gemini-1.5-flash-002"; // Stabilny model Google
             this._welcomeMsg = "Hello! I am Gemini. How can I help you?";
             this._temperature = 0.7;
             this._maxTokens = 1000;
@@ -245,11 +245,22 @@
                     }
                 };
 
-                const response = await fetch(url, {
+                let response = await fetch(url, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 });
+
+                // Fallback na stabilny model przy 404
+                if (response.status === 404 && this._model.endsWith("-latest")) {
+                    this._model = "gemini-1.5-flash-002";
+                    const fallbackUrl = `https://generativelanguage.googleapis.com/v1beta/models/${this._model}:generateContent?key=${this._apiKey}`;
+                    response = await fetch(fallbackUrl, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+                }
 
                 if (!response.ok) {
                     let errText = `${response.status} ${response.statusText}`;
