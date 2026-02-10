@@ -11,14 +11,14 @@
   "webcomponents": [
     {
       "kind": "main",
-      "tag": "com-twoja-firma-sap-gemini",
-      "url": "https://twoj-serwer-lub-github.com/sciezka/do/Gemini.bundle.js",
+      "tag": "com-kocu-sap-gemini",
+      "url": "https://github.com/k0cu/Gemini-widget/blob/main/GeminiWidget.js",
       "integrity": "",
       "ignoreIntegrity": true
     },
     {
       "kind": "builder",
-      "tag": "com-twoja-firma-sap-gemini-builder",
+      "tag": "com-kocu-sap-gemini-builder",
       "url": "https://twoj-serwer-lub-github.com/sciezka/do/Gemini.bundle.js",
       "integrity": "",
       "ignoreIntegrity": true
