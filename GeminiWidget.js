@@ -279,6 +279,13 @@
     }
 
     // Rejestracja WebComponentu (musi pasować do pola "tag" w sekcji main JSON-a)
-    // Użyj tagu: com-twoja-firma-sap-gemini
-    customElements.define("com-twoja-firma-sap-gemini", GeminiWidget);
+    const mainTag = "com-kocu-sap-gemini";
+    const builderTag = "com-kocu-sap-gemini-builder";
+
+    if (!customElements.get(mainTag)) {
+        customElements.define(mainTag, GeminiWidget);
+    }
+    if (!customElements.get(builderTag)) {
+        customElements.define(builderTag, GeminiWidget);
+    }
 })();
