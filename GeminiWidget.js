@@ -115,7 +115,7 @@
 
             // Default Properties
             this._apiKey = "";
-            this._model = "gemini-1.5-flash-002"; // Stabilny model Google
+            this._model = "gemini-2.0-flash"; // Najnowszy szybki model Google
             this._welcomeMsg = "Hello! I am Gemini. How can I help you?";
             this._temperature = 0.7;
             this._maxTokens = 1000;
@@ -253,7 +253,7 @@
 
                 // Fallback na stabilny model przy 404
                 if (response.status === 404 && this._model.endsWith("-latest")) {
-                    this._model = "gemini-1.5-flash-002";
+                    this._model = "gemini-2.0-flash";
                     const fallbackUrl = `https://generativelanguage.googleapis.com/v1beta/models/${this._model}:generateContent?key=${this._apiKey}`;
                     response = await fetch(fallbackUrl, {
                         method: "POST",

@@ -115,7 +115,7 @@
 
             // Default Properties
             this._apiKey = "";
-            this._model = "gemini-1.5-flash"; // Aktualny szybki model Google
+            this._model = "gemini-2.0-flash"; // Najnowszy szybki model Google
             this._welcomeMsg = "Hello! I am Gemini. How can I help you?";
             this._temperature = 0.7;
             this._maxTokens = 1000;
