@@ -27,6 +27,9 @@
             <label>Input Hint</label>
             <input id="inputHint" type="text" />
 
+            <label>Context Data</label>
+            <textarea id="contextData" rows="4"></textarea>
+
             <label>Temperature</label>
             <input id="temperature" type="number" step="0.1" min="0" max="2" />
 
@@ -57,6 +60,7 @@
                             headerLabel: this.headerLabel,
                             btnLabel: this.btnLabel,
                             inputHint: this.inputHint,
+                            contextData: this.contextData,
                             temperature: this.temperature,
                             maxTokens: this.maxTokens
                         }
@@ -83,6 +87,9 @@
         set inputHint(v) { this._shadowRoot.getElementById("inputHint").value = v || ""; }
         get inputHint() { return this._shadowRoot.getElementById("inputHint").value; }
 
+        set contextData(v) { this._shadowRoot.getElementById("contextData").value = v || ""; }
+        get contextData() { return this._shadowRoot.getElementById("contextData").value; }
+
         set temperature(v) { this._shadowRoot.getElementById("temperature").value = v ?? 0.7; }
         get temperature() { return parseFloat(this._shadowRoot.getElementById("temperature").value || "0.7"); }
 
@@ -90,5 +97,8 @@
         get maxTokens() { return parseInt(this._shadowRoot.getElementById("maxTokens").value || "1000", 10); }
     }
 
-    customElements.define("com-kocu-sap-gemini-builder", GeminiWidgetBuilder);
+    const builderTag = "com-kocu-sap-gemini-builder";
+    if (!customElements.get(builderTag)) {
+        customElements.define(builderTag, GeminiWidgetBuilder);
+    }
 })();

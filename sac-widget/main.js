@@ -115,7 +115,7 @@
 
             // Default Properties
             this._apiKey = "";
-            this._model = "gemini-2.0-flash"; // Najnowszy szybki model Google
+            this._model = "gemini-2.5-flash"; // Stabilny model Google
             this._welcomeMsg = "Hello! I am Gemini. How can I help you?";
             this._temperature = 0.7;
             this._maxTokens = 1000;
@@ -306,12 +306,8 @@
 
     // Rejestracja WebComponentu (musi pasować do pola "tag" w sekcji main JSON-a)
     const mainTag = "com-kocu-sap-gemini";
-    const builderTag = "com-kocu-sap-gemini-builder";
 
     if (!customElements.get(mainTag)) {
         customElements.define(mainTag, GeminiWidget);
-    }
-    if (!customElements.get(builderTag)) {
-        customElements.define(builderTag, GeminiWidget);
     }
 })();

@@ -33,7 +33,12 @@
     "model": {
       "description": "Gemini Model Name",
       "type": "string",
-      "default": "gemini-2.0-flash"
+      "default": "gemini-2.5-flash"
+    },
+    "contextData": {
+      "description": "Context Data injected into the prompt",
+      "type": "string",
+      "default": ""
     },
     "welcomeMsg": {
       "description": "Welcome Message",

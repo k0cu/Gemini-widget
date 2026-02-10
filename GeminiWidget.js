@@ -115,13 +115,14 @@
 
             // Default Properties
             this._apiKey = "";
-            this._model = "gemini-2.0-flash"; // Najnowszy szybki model Google
+            this._model = "gemini-2.5-flash"; // Stabilny model Google
             this._welcomeMsg = "Hello! I am Gemini. How can I help you?";
             this._temperature = 0.7;
             this._maxTokens = 1000;
             this._headerLabel = "Gemini AI";
             this._btnLabel = "Send";
             this._inputHint = "Type your message...";
+            this._contextData = "";
 
             // UI Elements
             this.$messages = this._shadowRoot.getElementById("messages");
@@ -174,6 +175,9 @@
             if (this.$input) this.$input.placeholder = value;
         }
         get inputHint() { return this._inputHint; }
+
+        set contextData(value) { this._contextData = value || ""; }
+        get contextData() { return this._contextData; }
 
         // Puste settery dla kompatybilności (gdyby JSON miał stare pola)
         set chatBoxHeight(v) {} 
@@ -235,9 +239,15 @@
                 // 2. Wywołanie Google Gemini API z retry logic
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/${this._model}:generateContent?key=${this._apiKey}`;
 
+                const parts = [];
+                if (this._contextData) {
+                    parts.push({ text: `Kontekst danych:\n${this._contextData}` });
+                }
+                parts.push({ text: text });
+
                 const payload = {
                     contents: [{
-                        parts: [{ text: text }]
+                        parts
                     }],
                     generationConfig: {
                         temperature: this._temperature,
@@ -279,7 +289,7 @@
 
                 // Fallback na stabilny model przy 404
                 if (response.status === 404 && this._model.endsWith("-latest")) {
-                    this._model = "gemini-2.0-flash";
+                    this._model = "gemini-2.5-flash";
                     const fallbackUrl = `https://generativelanguage.googleapis.com/v1beta/models/${this._model}:generateContent?key=${this._apiKey}`;
                     response = await fetch(fallbackUrl, {
                         method: "POST",
@@ -290,10 +300,28 @@
 
                 if (!response.ok) {
                     let errText = `${response.status} ${response.statusText}`;
+                    let errBody = null;
+                    let errRaw = null;
+
                     try {
-                        const errBody = await response.json();
+                        errBody = await response.json();
                         if (errBody?.error?.message) errText = errBody.error.message;
-                    } catch (_) {}
+                    } catch (_) {
+                        try {
+                            errRaw = await response.text();
+                            if (errRaw) errText = `${errText} | ${errRaw}`;
+                        } catch (_) {}
+                    }
+
+                    console.error("Gemini API error", {
+                        status: response.status,
+                        statusText: response.statusText,
+                        model: this._model,
+                        url,
+                        errorBody: errBody,
+                        errorRaw: errRaw
+                    });
+
                     throw new Error(`API Error: ${errText}`);
                 }
 
@@ -322,12 +350,8 @@
 
     // Rejestracja WebComponentu (musi pasować do pola "tag" w sekcji main JSON-a)
     const mainTag = "com-kocu-sap-gemini";
-    const builderTag = "com-kocu-sap-gemini-builder";
 
     if (!customElements.get(mainTag)) {
         customElements.define(mainTag, GeminiWidget);
-    }
-    if (!customElements.get(builderTag)) {
-        customElements.define(builderTag, GeminiWidget);
     }
 })();
