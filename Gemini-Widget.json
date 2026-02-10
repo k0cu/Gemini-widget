@@ -1,10 +1,10 @@
 {
   "id": "com.kocu.sap.gemini",
   "version": "1.0.0",
-  "name": "Google Gemini AI",
+  "name": "Google Gemini AI (Kocu)",
   "description": "Custom Widget for SAP Analytics Cloud integrating Google Gemini models.",
   "newInstancePrefix": "Gemini",
-  "vendor": "twoja-firma.com",
+  "vendor": "kocu",
   "eula": "",
   "license": "MIT",
   "icon": "https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg",
@@ -12,14 +12,14 @@
     {
       "kind": "main",
       "tag": "com-kocu-sap-gemini",
-      "url": "https://github.com/k0cu/Gemini-widget/blob/main/GeminiWidget.js",
+      "url": "https://raw.githubusercontent.com/k0cu/Gemini-widget/main/GeminiWidget.js",
       "integrity": "",
       "ignoreIntegrity": true
     },
     {
       "kind": "builder",
       "tag": "com-kocu-sap-gemini-builder",
-      "url": "https://twoj-serwer-lub-github.com/sciezka/do/Gemini.bundle.js",
+      "url": "https://raw.githubusercontent.com/k0cu/Gemini-widget/main/GeminiWidget.js",
       "integrity": "",
       "ignoreIntegrity": true
     }
@@ -59,6 +59,16 @@
       "description": "Max Output Tokens",
       "type": "number",
       "default": 1000
+    },
+    "headerLabel": {
+      "description": "Header Title",
+      "type": "string",
+      "default": "Gemini AI"
+    },
+    "inputHint": {
+      "description": "Input Placeholder",
+      "type": "string",
+      "default": "Wpisz wiadomość..."
     }
   },
   "methods": {
