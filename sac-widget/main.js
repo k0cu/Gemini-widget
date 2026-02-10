@@ -232,7 +232,7 @@
             this.$btn.innerText = "...";
 
             try {
-                // 2. Wywołanie Google Gemini API
+                // 2. Wywołanie Google Gemini API z retry logic
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/${this._model}:generateContent?key=${this._apiKey}`;
                 
                 const payload = {
@@ -245,11 +245,37 @@
                     }
                 };
 
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
+                let response;
+                let retries = 0;
+                const maxRetries = 3;
+
+                while (retries <= maxRetries) {
+                    try {
+                        response = await fetch(url, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(payload)
+                        });
+
+                        // Retry przy 429 Too Many Requests
+                        if (response.status === 429 && retries < maxRetries) {
+                            const waitTime = Math.pow(2, retries) * 2000; // 2s, 4s, 8s
+                            console.log(`Rate limited. Waiting ${waitTime}ms before retry...`);
+                            await new Promise(resolve => setTimeout(resolve, waitTime));
+                            retries++;
+                            continue;
+                        }
+
+                        break;
+                    } catch (fetchErr) {
+                        if (retries < maxRetries) {
+                            retries++;
+                            await new Promise(resolve => setTimeout(resolve, 1000));
+                            continue;
+                        }
+                        throw fetchErr;
+                    }
+                }
 
                 if (!response.ok) {
                     throw new Error(`API Error: ${response.status} ${response.statusText}`);
