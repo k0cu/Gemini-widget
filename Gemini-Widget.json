@@ -12,14 +12,14 @@
     {
       "kind": "main",
       "tag": "com-kocu-sap-gemini",
-      "url": "https://cdn.jsdelivr.net/gh/k0cu/Gemini-widget@main/GeminiWidget.js",
+      "url": "https://cdn.jsdelivr.net/gh/k0cu/Gemini-widget@main/GeminiWidget.js?t=20260211",
       "integrity": "",
       "ignoreIntegrity": true
     },
     {
       "kind": "builder",
       "tag": "com-kocu-sap-gemini-builder",
-      "url": "https://cdn.jsdelivr.net/gh/k0cu/Gemini-widget@main/GeminiWidget_Builder.js",
+      "url": "https://cdn.jsdelivr.net/gh/k0cu/Gemini-widget@main/GeminiWidget_Builder.js?t=20260211",
       "integrity": "",
       "ignoreIntegrity": true
     }
