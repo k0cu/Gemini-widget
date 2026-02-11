@@ -1,6 +1,6 @@
 {
   "id": "com.kocu.sap.gemini",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Google Gemini AI (Kocu)",
   "description": "Custom Widget for SAP Analytics Cloud integrating Google Gemini models.",
   "newInstancePrefix": "Gemini",
@@ -12,14 +12,14 @@
     {
       "kind": "main",
       "tag": "com-kocu-sap-gemini",
-      "url": "https://cdn.jsdelivr.net/gh/k0cu/Gemini-widget@main/GeminiWidget.js",
+      "url": "https://raw.githubusercontent.com/k0cu/Gemini-widget/main/GeminiWidget.js?v=1.0.1",
       "integrity": "",
       "ignoreIntegrity": true
     },
     {
       "kind": "builder",
       "tag": "com-kocu-sap-gemini-builder",
-      "url": "https://cdn.jsdelivr.net/gh/k0cu/Gemini-widget@main/GeminiWidget_Builder.js",
+      "url": "https://raw.githubusercontent.com/k0cu/Gemini-widget/main/GeminiWidget_Builder.js?v=1.0.1",
       "integrity": "",
       "ignoreIntegrity": true
     }
@@ -98,6 +98,17 @@
         }
       ],
       "body": "this.model = model;"
+    },
+    "setContextData": {
+      "description": "Set Context Data",
+      "parameters": [
+        {
+          "name": "contextData",
+          "type": "string",
+          "description": "Context Data"
+        }
+      ],
+      "body": "this.contextData = contextData;"
     }
   },
   "events": {
